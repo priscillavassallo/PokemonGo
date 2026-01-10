@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { StandardImageBackground } from '../styled-components/StandardImageBackground';
+import { StaticScreenProps } from '@react-navigation/native';
 
 const IdText = styled.Text`
   color: yellow;
@@ -16,10 +17,17 @@ const InfoDisplay = styled.View`
   align-items: 'flex-start';
 `;
 
-export default function PokemonIdScreen() {
+type Props = StaticScreenProps<{
+  id: string;
+}>;
+
+export default function PokemonIdScreen({ route }: Props) {
+  const id = route.params.id;
+  const onlyId = id.substr(19, id.length);
+
   return (
     <StandardImageBackground>
-      <IdText>ID: ???</IdText>
+      <IdText>ID: {onlyId}</IdText>
 
       <IdPlaceholder />
 

@@ -86,8 +86,13 @@ export default function ScanScreen() {
   }, []);
 
   const codeScanner = useCodeScanner({
-    codeTypes: ['qr', 'ean-13'],
-    onCodeScanned: () => navigation.navigate('PokemonId'),
+    codeTypes: ['qr'],
+    onCodeScanned: codes => {
+      console.log(codes[0]);
+      navigation.navigate('PokemonId', {
+        id: codes[0].value ? codes[0].value : '',
+      });
+    },
   });
 
   const { hasPermission, requestPermission } = useCameraPermission();
