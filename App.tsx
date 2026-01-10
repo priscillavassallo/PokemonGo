@@ -6,18 +6,34 @@
  */
 
 import { StatusBar, useColorScheme } from 'react-native';
-import {
-  SafeAreaProvider,
-} from 'react-native-safe-area-context';
-import Home from './src/screens/home';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import HomeScreen from './src/screens/Home';
+import * as React from 'react';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import PokemonIdScreen from './src/screens/PokemonId';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
+  const RootStack = createNativeStackNavigator({
+    screens: {
+      Home: {
+        screen: HomeScreen,
+      },
+      PokemonId: {
+        screen: PokemonIdScreen,
+      },
+    },
+    screenOptions: { headerShown: false },
+  });
+
+  const Navigation = createStaticNavigation(RootStack);
+
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Home />
+      <Navigation />
     </SafeAreaProvider>
   );
 }
