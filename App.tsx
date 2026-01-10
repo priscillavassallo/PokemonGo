@@ -12,6 +12,7 @@ import * as React from 'react';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PokemonIdScreen from './src/screens/PokemonId';
+import ScanScreen from './src/screens/Scan';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -20,6 +21,9 @@ function App() {
     screens: {
       Home: {
         screen: HomeScreen,
+      },
+      Scan: {
+        screen: ScanScreen,
       },
       PokemonId: {
         screen: PokemonIdScreen,

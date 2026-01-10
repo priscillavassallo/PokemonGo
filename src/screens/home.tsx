@@ -35,7 +35,7 @@ export default function HomeScreen() {
 
       <Logo />
 
-      <ScanButton onPress={() => navigation.navigate('PokemonId')}>
+      <ScanButton onPress={() => navigation.navigate('Scan')}>
         <TextButton>Scannear QRCODE</TextButton>
       </ScanButton>
     </StandardImageBackground>
