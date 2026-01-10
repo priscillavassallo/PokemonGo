@@ -2,8 +2,7 @@ import { View } from 'react-native';
 import styled from 'styled-components/native';
 import { StandardImageBackground } from '../styled-components/StandardImageBackground';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
+import { ScreenNavigationProp } from '../navigation/types';
 
 const Title = styled.Text`
   color: red;
@@ -25,13 +24,8 @@ const TextButton = styled.Text`
   font-family: ComicReliefBold;
 `;
 
-type HomeNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'PokemonId'
->;
-
 export default function HomeScreen() {
-  const navigation = useNavigation<HomeNavigationProp>();
+  const navigation = useNavigation<ScreenNavigationProp>();
 
   return (
     <StandardImageBackground>

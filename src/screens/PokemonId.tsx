@@ -7,12 +7,12 @@ const IdText = styled.Text`
 `;
 const IdPlaceholder = styled.View`
   background-color: #1eff00ff;
-  width: 100;
-  height: 100;
+  width: 100px;
+  height: 100px;
 `;
 const InfoDisplay = styled.View`
-  width: 250;
-  height: 50;
+  width: 250px;
+  height: 50px;
   align-items: 'flex-start';
 `;
 
