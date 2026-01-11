@@ -15,6 +15,7 @@ import {
   useCodeScanner,
 } from 'react-native-vision-camera';
 import { ScreenNavigationProp } from '../navigation/types';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const CORNER_SIZE = 28;
 const CORNER_WIDTH = 4;
@@ -99,7 +100,7 @@ export default function ScanScreen() {
   if (!hasPermission || device == undefined) return GoHome();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaProvider style={styles.container}>
       {Platform.OS === 'android' && <StatusBar hidden />}
 
       <Camera
@@ -120,7 +121,7 @@ export default function ScanScreen() {
 
         <Text style={styles.instruction}>Aponte a câmera para o código QR</Text>
       </View>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 

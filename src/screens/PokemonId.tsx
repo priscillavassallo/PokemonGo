@@ -55,7 +55,7 @@ type Pokemon = {
 
 export default function PokemonIdScreen({ route }: Props) {
   const id = route.params.id;
-  const onlyId = id.substr(19, id.length);
+  const onlyId = id.slice(19);
 
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [loading, setLoading] = useState(true);
