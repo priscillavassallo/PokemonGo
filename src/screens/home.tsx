@@ -1,6 +1,10 @@
 import { View } from 'react-native';
 import styled from 'styled-components/native';
 import { StandardImageBackground } from '../styled-components/StandardImageBackground';
+import {
+  StandardHomeButton,
+  TextHomeButton,
+} from '../styled-components/StandardButton';
 import { useNavigation } from '@react-navigation/native';
 import { ScreenNavigationProp } from '../navigation/types';
 
@@ -14,15 +18,6 @@ const Logo = styled.Image.attrs({
 })`
   width: 50%;
 `;
-const ScanButton = styled.TouchableOpacity`
-  background-color: white;
-  padding: 18px 12px;
-`;
-
-const TextButton = styled.Text`
-  color: #000;
-  font-family: ComicReliefBold;
-`;
 
 export default function HomeScreen() {
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -35,9 +30,9 @@ export default function HomeScreen() {
 
       <Logo />
 
-      <ScanButton onPress={() => navigation.navigate('Scan')}>
-        <TextButton>Scannear QRCODE</TextButton>
-      </ScanButton>
+      <StandardHomeButton onPress={() => navigation.navigate('Scan')}>
+        <TextHomeButton>Scannear QRCODE</TextHomeButton>
+      </StandardHomeButton>
     </StandardImageBackground>
   );
 }

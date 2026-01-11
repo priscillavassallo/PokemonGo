@@ -1,27 +1,46 @@
 import styled from 'styled-components/native';
 import { StandardImageBackground } from '../styled-components/StandardImageBackground';
-import { StaticScreenProps } from '@react-navigation/native';
+import {
+  StandardBackButton,
+  TextBackButton,
+} from '../styled-components/StandardButton';
+import { StaticScreenProps, useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { capitalize } from '../utils/capitalize';
+import { ScreenNavigationProp } from '../navigation/types';
 
 const IdText = styled.Text`
   color: yellow;
   font-family: ComicReliefBold;
 `;
-const IdPlaceholder = styled.View`
-  background-color: #1eff00ff;
-  width: 100px;
-  height: 100px;
+const ImageContainer = styled.View`
+  align-items: center;
+  justify-content: center;
 `;
+
+const PokemonImage = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  min-width: 160px;
+  min-height: 160px;
+`;
+
+const ButtonContainer = styled.View`
+  width: 250px;
+  align-items: flex-end;
+`;
+
 const InfoDisplay = styled.View`
   width: 250px;
-  height: 50px;
+  height: 100px;
   align-items: 'flex-start';
+  justify-content: space-evenly;
 `;
 
 type Props = StaticScreenProps<{
   id: string;
 }>;
+
 type Pokemon = {
   name: string;
   types: {
@@ -29,6 +48,9 @@ type Pokemon = {
       name: string;
     };
   }[];
+  sprites: {
+    front_default: string | null;
+  };
 };
 
 export default function PokemonIdScreen({ route }: Props) {
@@ -37,6 +59,8 @@ export default function PokemonIdScreen({ route }: Props) {
 
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const navigation = useNavigation<ScreenNavigationProp>();
 
   useEffect(() => {
     async function getData() {
@@ -60,10 +84,14 @@ export default function PokemonIdScreen({ route }: Props) {
     <StandardImageBackground>
       <IdText>ID: {onlyId}</IdText>
 
-      <IdPlaceholder />
+      <ImageContainer>
+        {pokemon?.sprites.front_default && (
+          <PokemonImage source={{ uri: pokemon.sprites.front_default }} />
+        )}
+      </ImageContainer>
 
       <InfoDisplay>
-        {loading && <IdText>Loading...</IdText>}
+        {loading && <IdText>Carregando...</IdText>}
 
         {!loading && pokemon && (
           <>
@@ -74,6 +102,12 @@ export default function PokemonIdScreen({ route }: Props) {
           </>
         )}
       </InfoDisplay>
+
+      <ButtonContainer>
+        <StandardBackButton onPress={() => navigation.navigate('Home')}>
+          <TextBackButton>Voltar ao Início</TextBackButton>
+        </StandardBackButton>
+      </ButtonContainer>
     </StandardImageBackground>
   );
 }
